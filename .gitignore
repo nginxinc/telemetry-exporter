@@ -1,0 +1,49 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+cover.html
+conformance/conformance-profile.yaml
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Vim
+*.swp
+*.swo
+
+# GoLand IDE and VSCode
+.idea
+.vscode
+
+# Binary and Artifacts
+build/.out
+build/out
+dist/
+
+# Test artifacts
+tests/**/*.csv
+
+# Node modules
+node_modules/
+
+# JS test coverage
+internal/mode/static/nginx/modules/coverage
+
+# MacOS Finder
+.DS_Store
+
+# Certs and keys
+*.crt
+*.key
+
+# Dotenv files
+**/*.env

@@ -1,0 +1,19 @@
+@namespace("nginx.org") protocol ProductData {
+	@df_datatype("ngf") record TelemetryData {
+		/** The field that identifies what type of data this is. */
+		string dataType;
+		/** The time the event occurred */
+		long eventTime;
+		/** The time our edge ingested the event */
+		long ingestTime;
+
+	
+		
+		/** The ProductID of the product. */
+		string? ProductID = null;
+		
+		/** The ResourceCount of the product. */
+		int? ResourceCount = null;
+		
+	}
+}
