@@ -56,9 +56,7 @@ var _ = Describe("Exporter", func() {
 
 		When("no errors occur", func() {
 			It("exports data successfully", func() {
-				err := exporter.Export(context.Background(), data)
-
-				Expect(err).ToNot(HaveOccurred())
+				Expect(exporter.Export(context.Background(), data)).To(Succeed())
 
 				Expect(fakeSpanExporter.ExportSpansCallCount()).To(Equal(1))
 
