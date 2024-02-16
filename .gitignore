@@ -1,0 +1,17 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Output of the go coverage tool
+cmd-cover.out
+
+# Vim
+*.swp
+*.swo
+
+# GoLand IDE and VSCode
+.idea
+.vscode
