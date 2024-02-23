@@ -8,6 +8,7 @@ help: Makefile ## Display this help
 .PHONY: unit-test
 unit-test:
 	go test ./... -race -coverprofile cmd-cover.out
+	go tool cover -html=cmd-cover.out -o cmd-cover.html
 
 .PHONY: clean-go-cache
 clean-go-cache: ## Clean go cache

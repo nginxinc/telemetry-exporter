@@ -1,0 +1,68 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+*"
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: ${{ github.ref_name }}-ci
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  vars:
+    name: Checks and variables
+    runs-on: ubuntu-22.04
+    outputs:
+      go_path: ${{ steps.vars.outputs.go_path }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Setup Golang Environment
+        uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5.0.0
+        with:
+          go-version: stable
+
+      - name: Output Variables
+        id: vars
+        run: echo "go_path=$(go env GOPATH)" >> $GITHUB_OUTPUT
+
+      - name: Check if go.mod and go.sum are up to date
+        run: go mod tidy && git diff --exit-code -- go.mod go.sum
+
+      - name: Check if generated go files are up to date
+        run: make generate && git diff --exit-code
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-22.04
+    needs: vars
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Setup Golang Environment
+        uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5.0.0
+        with:
+          go-version: stable
+
+      - name: Run Tests
+        run: make unit-test
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
+        with:
+          name: cover-${{ github.run_id }}.html
+          path: ${{ github.workspace }}/cmd-cover.html
+        if: always()
