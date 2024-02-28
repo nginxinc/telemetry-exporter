@@ -24,7 +24,10 @@ This is a generated file. DO NOT EDIT.
 import (
 	"go.opentelemetry.io/otel/attribute"
 
-	{{ if .TelemetryPackagePath }}"{{ .TelemetryPackagePath }}"{{ end }}
+	{{ if .TelemetryPackagePath }}
+	{{ if .TelemetryPackageAlias }}{{ .TelemetryPackageAlias }} {{ end -}}
+	"{{ .TelemetryPackagePath }}"
+	{{ end }}
 )
 
 func (d *{{ .StructName }}) Attributes() []attribute.KeyValue {
@@ -43,6 +46,7 @@ var _ {{ .ExportablePackagePrefix }}Exportable = (*{{ .StructName }})(nil)
 type codeGen struct {
 	PackageName             string
 	TelemetryPackagePath    string
+	TelemetryPackageAlias   string
 	ExportablePackagePrefix string
 	StructName              string
 	BuildTags               string
@@ -98,18 +102,31 @@ func generateCode(writer io.Writer, cfg codeGenConfig) error {
 		codeFields = append(codeFields, cf)
 	}
 
-	var telemetryPkg string
-	var exportablePkgPrefix string
+	const alias = "ngxTelemetry"
+
+	var (
+		telemetryPkg        string
+		exportablePkgPrefix string
+		telemetryPkgAlias   string
+	)
 
 	// check if we generate code for the type in the telemetry package or any other package
 	if cfg.packagePath != telemetryPackagePath {
 		telemetryPkg = telemetryPackagePath
-		exportablePkgPrefix = getPackageName(telemetryPackagePath) + "."
+
+		// if the name of the package is the same as the telemetry package, we need to use an alias
+		if getPackageName(cfg.packagePath) == getPackageName(telemetryPackagePath) {
+			exportablePkgPrefix = alias + "."
+			telemetryPkgAlias = alias
+		} else {
+			exportablePkgPrefix = getPackageName(telemetryPackagePath) + "."
+		}
 	}
 
 	cg := codeGen{
 		PackageName:             getPackageName(cfg.packagePath),
 		ExportablePackagePrefix: exportablePkgPrefix,
+		TelemetryPackageAlias:   telemetryPkgAlias,
 		TelemetryPackagePath:    telemetryPkg,
 		StructName:              cfg.typeName,
 		Fields:                  codeFields,
