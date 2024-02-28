@@ -23,7 +23,7 @@ func TestData_Attributes(t *testing.T) {
 		SomeInts:    []int64{1, 2, 3},
 		SomeFloats:  []float64{1.1, 2.2, 3.3},
 		SomeBools:   []bool{true, false, true},
-		Data2: subtests.Data2{
+		AnotherData: subtests.AnotherData{
 			AnotherSomeString:  "another string",
 			AnotherSomeInt:     24,
 			AnotherSomeFloat:   1.41,

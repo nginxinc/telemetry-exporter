@@ -9,7 +9,7 @@ import (
 	"github.com/nginxinc/telemetry-exporter/pkg/telemetry"
 )
 
-func (d *Data2) Attributes() []attribute.KeyValue {
+func (d *AnotherData) Attributes() []attribute.KeyValue {
 	var attrs []attribute.KeyValue
 
 	attrs = append(attrs, attribute.String("AnotherSomeString", d.AnotherSomeString))
@@ -25,4 +25,4 @@ func (d *Data2) Attributes() []attribute.KeyValue {
 	return attrs
 }
 
-var _ telemetry.Exportable = (*Data2)(nil)
+var _ telemetry.Exportable = (*AnotherData)(nil)

@@ -2,13 +2,13 @@
 
 package subtests
 
-// Data2 is a struct that can be exported by a struct in another package to test cross-package referencing
+// AnotherData is a struct that can be exported by a struct in another package to test cross-package referencing
 // when generating code and scheme.
-// Data2 includes a field of each supported data type except an embedded struct.
+// AnotherData includes a field of each supported data type except an embedded struct.
 //
-//go:generate go run -tags generator github.com/nginxinc/telemetry-exporter/cmd/generator -type=Data2 -build-tags=generator
+//go:generate go run -tags generator github.com/nginxinc/telemetry-exporter/cmd/generator -type=AnotherData -build-tags=generator
 //nolint:govet // Disable fieldalignment linter (part of govet), to control the order of fields for better readability.
-type Data2 struct {
+type AnotherData struct {
 	// AnotherSomeString is a string field.
 	AnotherSomeString string
 	// AnotherSomeInt is an int64 field.

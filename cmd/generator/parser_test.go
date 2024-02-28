@@ -354,7 +354,7 @@ func TestParseSuccess(t *testing.T) {
 		},
 		{
 			docString:            "",
-			name:                 "Data2",
+			name:                 "AnotherData",
 			fieldType:            0,
 			slice:                false,
 			embeddedStruct:       true,

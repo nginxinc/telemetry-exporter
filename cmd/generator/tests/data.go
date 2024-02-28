@@ -31,5 +31,5 @@ type Data struct {
 	// SomeBools is a slice of bool.
 	SomeBools []bool
 
-	subtests.Data2
+	subtests.AnotherData
 }

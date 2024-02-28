@@ -20,7 +20,7 @@ func (d *Data) Attributes() []attribute.KeyValue {
 	attrs = append(attrs, attribute.Int64Slice("SomeInts", d.SomeInts))
 	attrs = append(attrs, attribute.Float64Slice("SomeFloats", d.SomeFloats))
 	attrs = append(attrs, attribute.BoolSlice("SomeBools", d.SomeBools))
-	attrs = append(attrs, d.Data2.Attributes()...)
+	attrs = append(attrs, d.AnotherData.Attributes()...)
 	
 
 	return attrs
