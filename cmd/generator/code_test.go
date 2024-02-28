@@ -35,8 +35,7 @@ func TestGenerateCode(t *testing.T) {
 		fields:      fields,
 	}
 
-	err = generateCode(&buf, codeCfg)
+	g.Expect(generateCode(&buf, codeCfg)).To(Succeed())
 
-	g.Expect(err).ToNot(HaveOccurred())
 	g.Expect(buf.Bytes()).ToNot(BeEmpty())
 }

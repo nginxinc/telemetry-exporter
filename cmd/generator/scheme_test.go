@@ -37,8 +37,7 @@ func TestGenerateScheme(t *testing.T) {
 		fields:             fields,
 	}
 
-	err = generateScheme(&buf, schemeCfg)
+	g.Expect(generateScheme(&buf, schemeCfg)).To(Succeed())
 
-	g.Expect(err).ToNot(HaveOccurred())
 	g.Expect(buf.Bytes()).ToNot(BeEmpty())
 }
