@@ -24,25 +24,25 @@ func exitWithError(err error) {
 	os.Exit(1)
 }
 
-func existWithUsage() {
+func exitWithUsage() {
 	flag.Usage()
 	os.Exit(1)
 }
 
 func validateFlags() {
 	if *typeName == "" {
-		existWithUsage()
+		exitWithUsage()
 	}
 
 	if *scheme {
 		if *schemeNamespace == "" {
-			existWithUsage()
+			exitWithUsage()
 		}
 		if *schemeProtocol == "" {
-			existWithUsage()
+			exitWithUsage()
 		}
 		if *schemeDataFabricDataType == "" {
-			existWithUsage()
+			exitWithUsage()
 		}
 	}
 }
