@@ -68,7 +68,7 @@ func main() {
 		buildFlags: buildFlags,
 	}
 
-	fields, err := parse(cfg)
+	result, err := parse(cfg)
 	if err != nil {
 		exitWithError(fmt.Errorf("failed to parse struct: %w", err))
 	}
@@ -92,9 +92,9 @@ func main() {
 		}
 
 		codeCfg := codeGenConfig{
-			packageName: pkgName,
+			packagePath: result.packagePath,
 			typeName:    *typeName,
-			fields:      fields,
+			fields:      result.fields,
 			buildTags:   codeGenBuildTags,
 		}
 
@@ -119,7 +119,7 @@ func main() {
 			protocol:           *schemeProtocol,
 			dataFabricDataType: *schemeDataFabricDataType,
 			record:             *typeName,
-			fields:             fields,
+			fields:             result.fields,
 		}
 
 		if err := generateScheme(file, schemeCfg); err != nil {

@@ -362,8 +362,13 @@ func TestParseSuccess(t *testing.T) {
 		},
 	}
 
-	fields, err := parse(cfg)
+	expectedResult := parsingResult{
+		packagePath: "github.com/nginxinc/telemetry-exporter/cmd/generator/tests",
+		fields:      expectedFields,
+	}
+
+	result, err := parse(cfg)
 
 	g.Expect(err).To(BeNil())
-	g.Expect(fields).To(Equal(expectedFields))
+	g.Expect(expectedResult).To(Equal(result))
 }

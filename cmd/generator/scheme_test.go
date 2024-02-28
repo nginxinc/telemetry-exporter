@@ -23,7 +23,7 @@ func TestGenerateScheme(t *testing.T) {
 
 	_ = tests.Data{} // depends on the type being defined
 
-	fields, err := parse(parseCfg)
+	parsingResult, err := parse(parseCfg)
 
 	g.Expect(err).ToNot(HaveOccurred())
 
@@ -34,7 +34,7 @@ func TestGenerateScheme(t *testing.T) {
 		protocol:           "avro",
 		dataFabricDataType: "telemetry",
 		record:             parseCfg.typeName,
-		fields:             fields,
+		fields:             parsingResult.fields,
 	}
 
 	g.Expect(generateScheme(&buf, schemeCfg)).To(Succeed())

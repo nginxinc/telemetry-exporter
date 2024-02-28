@@ -6,8 +6,14 @@ import (
 	"fmt"
 	"go/types"
 	"io"
+	"reflect"
+	"strings"
 	"text/template"
+
+	"github.com/nginxinc/telemetry-exporter/pkg/telemetry"
 )
+
+var telemetryPackagePath = reflect.TypeOf((*telemetry.Exportable)(nil)).Elem().PkgPath()
 
 const codeTemplate = `{{ if .BuildTags }}//go:build {{ .BuildTags }}{{ end }}
 package {{ .PackageName }}
@@ -17,7 +23,8 @@ This is a generated file. DO NOT EDIT.
 
 import (
 	"go.opentelemetry.io/otel/attribute"
-	"github.com/nginxinc/telemetry-exporter/pkg/telemetry"
+
+	{{ if .TelemetryPackagePath }}"{{ .TelemetryPackagePath }}"{{ end }}
 )
 
 func (d *{{ .StructName }}) Attributes() []attribute.KeyValue {
@@ -30,14 +37,16 @@ func (d *{{ .StructName }}) Attributes() []attribute.KeyValue {
 	return attrs
 }
 
-var _ telemetry.Exportable = (*{{ .StructName }})(nil)
+var _ {{ .ExportablePackagePrefix }}Exportable = (*{{ .StructName }})(nil)
 `
 
 type codeGen struct {
-	PackageName string
-	StructName  string
-	BuildTags   string
-	Fields      []codeField
+	PackageName             string
+	TelemetryPackagePath    string
+	ExportablePackagePrefix string
+	StructName              string
+	BuildTags               string
+	Fields                  []codeField
 }
 
 type codeField struct {
@@ -60,7 +69,7 @@ func getAttributeType(kind types.BasicKind) string {
 }
 
 type codeGenConfig struct {
-	packageName string
+	packagePath string
 	typeName    string
 	buildTags   string
 	fields      []field
@@ -89,11 +98,22 @@ func generateCode(writer io.Writer, cfg codeGenConfig) error {
 		codeFields = append(codeFields, cf)
 	}
 
+	var telemetryPkg string
+	var exportablePkgPrefix string
+
+	// check if we generate code for the type in the telemetry package or any other package
+	if cfg.packagePath != telemetryPackagePath {
+		telemetryPkg = telemetryPackagePath
+		exportablePkgPrefix = getPackageName(telemetryPackagePath) + "."
+	}
+
 	cg := codeGen{
-		PackageName: cfg.packageName,
-		StructName:  cfg.typeName,
-		Fields:      codeFields,
-		BuildTags:   cfg.buildTags,
+		PackageName:             getPackageName(cfg.packagePath),
+		ExportablePackagePrefix: exportablePkgPrefix,
+		TelemetryPackagePath:    telemetryPkg,
+		StructName:              cfg.typeName,
+		Fields:                  codeFields,
+		BuildTags:               cfg.buildTags,
 	}
 
 	funcMap := template.FuncMap{
@@ -107,4 +127,9 @@ func generateCode(writer io.Writer, cfg codeGenConfig) error {
 	}
 
 	return nil
+}
+
+func getPackageName(packagePath string) string {
+	packageParts := strings.Split(packagePath, "/")
+	return packageParts[len(packageParts)-1]
 }

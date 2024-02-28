@@ -163,6 +163,14 @@ type parsingConfig struct {
 	loadTests bool
 }
 
+// parsingResult is the result of the parsing.
+type parsingResult struct {
+	// packagePath is the package path of the parsed struct.
+	packagePath string
+	// fields are the fields of the parsed struct, including the fields of the embedded structs.
+	fields []field
+}
+
 // field represents a field of a struct.
 // the field is either a basic type, a slice of basic type or an embedded struct.
 type field struct {
@@ -181,7 +189,7 @@ type field struct {
 // rules.
 // - Must have unique names across all embedded structs.
 // - Must have a doc string comment for each field.
-func parse(parsingCfg parsingConfig) ([]field, error) {
+func parse(parsingCfg parsingConfig) (parsingResult, error) {
 	mode := packages.NeedName | packages.NeedTypes | packages.NeedTypesInfo
 
 	cfg := packages.Config{
@@ -198,7 +206,7 @@ func parse(parsingCfg parsingConfig) ([]field, error) {
 
 	loadedPackages, err := packages.Load(&cfg, pattern)
 	if err != nil {
-		return nil, fmt.Errorf("failed to load package: %w", err)
+		return parsingResult{}, fmt.Errorf("failed to load package: %w", err)
 	}
 
 	var pkg *packages.Package
@@ -215,22 +223,30 @@ func parse(parsingCfg parsingConfig) ([]field, error) {
 	}
 
 	if pkg == nil {
-		return nil, fmt.Errorf("package %s not found", parsingCfg.pkgName)
+		return parsingResult{}, fmt.Errorf("package %s not found", parsingCfg.pkgName)
 	}
 
 	targetType := pkg.Types.Scope().Lookup(parsingCfg.typeName)
 	if targetType == nil {
-		return nil, fmt.Errorf("type %s not found", parsingCfg.typeName)
+		return parsingResult{}, fmt.Errorf("type %s not found", parsingCfg.typeName)
 	}
 
 	s, ok := targetType.Type().Underlying().(*types.Struct)
 	if !ok {
-		return nil, fmt.Errorf("expected struct, got %s", targetType.Type().Underlying().String())
+		return parsingResult{}, fmt.Errorf("expected struct, got %s", targetType.Type().Underlying().String())
 	}
 
 	docStringProvider := newDocStringFieldsProvider(parsingCfg.loadTests, parsingCfg.buildFlags)
 
-	return parseStruct(s, targetType.Type().String(), docStringProvider)
+	fields, err := parseStruct(s, targetType.Type().String(), docStringProvider)
+	if err != nil {
+		return parsingResult{}, err
+	}
+
+	return parsingResult{
+		packagePath: pkg.PkgPath,
+		fields:      fields,
+	}, nil
 }
 
 //nolint:gocyclo

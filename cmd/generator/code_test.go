@@ -23,16 +23,16 @@ func TestGenerateCode(t *testing.T) {
 
 	_ = tests.Data{} // depends on the type being defined
 
-	fields, err := parse(cfg)
+	parsingResult, err := parse(cfg)
 
 	g.Expect(err).ToNot(HaveOccurred())
 
 	var buf bytes.Buffer
 
 	codeCfg := codeGenConfig{
-		packageName: "tests",
+		packagePath: parsingResult.packagePath,
 		typeName:    "Data",
-		fields:      fields,
+		fields:      parsingResult.fields,
 	}
 
 	g.Expect(generateCode(&buf, codeCfg)).To(Succeed())
