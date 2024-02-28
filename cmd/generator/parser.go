@@ -33,7 +33,7 @@ func newDocStringFieldsProvider(loadTests bool, buildFlags []string) *docStringF
 	}
 }
 
-func parseFullTypeName(fullTypeName string) (pkgName string, typeName string) {
+func parseFullTypeName(fullTypeName string) (pkgName, typeName string) {
 	idx := strings.LastIndex(fullTypeName, ".")
 	if idx == -1 {
 		panic(fmt.Sprintf("invalid full type name: %s", fullTypeName))
@@ -42,14 +42,14 @@ func parseFullTypeName(fullTypeName string) (pkgName string, typeName string) {
 	return fullTypeName[:idx], fullTypeName[idx+1:]
 }
 
-func getDocStringKey(pkgName string, typeName string, fieldName string) string {
+func getDocStringKey(pkgName, typeName, fieldName string) string {
 	return fmt.Sprintf("%s.%s.%s", pkgName, typeName, fieldName)
 }
 
 // getDocString returns the doc string comment for the field of the struct.
 // fullTypeName is the full type name of the struct
 // (e.g. "github.com/nginxinc/nginx-gateway-fabric/pkg/mypackage.MyStruct").
-func (p *docStringFieldsProvider) getDocString(fullTypeName string, fieldName string) (string, error) {
+func (p *docStringFieldsProvider) getDocString(fullTypeName, fieldName string) (string, error) {
 	pkgName, typeName := parseFullTypeName(fullTypeName)
 
 	_, exists := p.packages[pkgName]
