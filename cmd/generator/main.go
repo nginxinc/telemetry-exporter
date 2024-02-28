@@ -11,7 +11,7 @@ import (
 
 var (
 	code                     = flag.Bool("code", true, "Generate code")
-	buildTags                = flag.String("build-tags", "", "Comma separated list of build tags expected in the source files and that will be added to the generated code") //nolint:lll
+	buildTags                = flag.String("build-tags", "", "Comma separated list of build tags expected in the source files that will be added to the generated code") //nolint:lll
 	scheme                   = flag.Bool("scheme", false, "Generate Avro scheme")
 	schemeNamespace          = flag.String("scheme-namespace", "gateway.nginx.org", "Scheme namespace; required when -scheme is set") //nolint:lll
 	schemeProtocol           = flag.String("scheme-protocol", "", "Scheme protocol; required when -scheme is set")
