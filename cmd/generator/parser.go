@@ -155,7 +155,7 @@ type parsingConfig struct {
 	typeName string
 	// loadPattern is the pattern to load the package.
 	// For example, "github.com/nginxinc/nginx-gateway-fabric/pkg/mypackage" or "."
-	// That path in the pattern are relative to the current working directory.
+	// The path in the pattern is relative to the current working directory.
 	loadPattern string
 	// buildFlags are go build flags (e.g. -tags=foo).
 	buildFlags []string
