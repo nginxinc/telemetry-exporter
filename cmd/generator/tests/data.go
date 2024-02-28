@@ -9,7 +9,7 @@ import "github.com/nginxinc/telemetry-exporter/cmd/generator/tests/subtests"
 // We also use it to test that the generated code compiles and runs as expected.
 //
 //go:generate go run -tags generator github.com/nginxinc/telemetry-exporter/cmd/generator -type=Data -build-tags=generator -scheme -scheme-protocol=NGFProductTelemetry -scheme-df-datatype=ngf-product-telemetry
-//nolint:govet
+//nolint:govet // Disable fieldalignment linter (part of govet), to control the order of fields for better readability.
 type Data struct {
 	// SomeString is a string field.
 	SomeString string

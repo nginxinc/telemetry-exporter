@@ -7,7 +7,7 @@ package subtests
 // Data2 includes a field of each supported data type except an embedded struct.
 //
 //go:generate go run -tags generator github.com/nginxinc/telemetry-exporter/cmd/generator -type=Data2 -build-tags=generator
-//nolint:govet
+//nolint:govet // Disable fieldalignment linter (part of govet), to control the order of fields for better readability.
 type Data2 struct {
 	// AnotherSomeString is a string field.
 	AnotherSomeString string
