@@ -6,8 +6,8 @@
 *.dylib
 
 # Output of the go coverage tool
-cmd-cover.out
-cmd-cover.html
+*cover.out
+*cover.html
 
 # Vim
 *.swp

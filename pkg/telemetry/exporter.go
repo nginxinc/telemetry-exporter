@@ -11,6 +11,18 @@ import (
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 )
 
+// Data includes common telemetry data points.
+// FIXME(pleshakov): Define the data points.
+// Currently, only one data point is added, for the only reason that we can make sure the generator
+// generates code for a struct defined in this package.
+// https://github.com/nginxinc/telemetry-exporter/issues/8 will define the actual data points.
+//
+//go:generate go run -tags=generator github.com/nginxinc/telemetry-exporter/cmd/generator -type Data
+type Data struct {
+	// Nodes is a number of nodes.
+	Nodes int64
+}
+
 // Exportable allows exporting telemetry data using the Exporter.
 type Exportable interface {
 	// Attributes returns a list of key-value pairs that represent the telemetry data.

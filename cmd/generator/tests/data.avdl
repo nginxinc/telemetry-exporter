@@ -1,0 +1,61 @@
+@namespace("gateway.nginx.org") protocol NGFProductTelemetry {
+	@df_datatype("ngf-product-telemetry") record Data {
+		/** The field that identifies what type of data this is. */
+		string dataType;
+		/** The time the event occurred */
+		long eventTime;
+		/** The time our edge ingested the event */
+		long ingestTime;
+
+		
+		/** SomeString is a string field. */
+		string? someString = null;
+		
+		/** SomeInt is an int64 field. */
+		long? someInt = null;
+		
+		/** SomeFloat is a float64 field.
+More comments. */
+		double? someFloat = null;
+		
+		/** SomeBool is a bool field. */
+		boolean? someBool = null;
+		
+		/** SomeStrings is a slice of strings. */
+		union {null, array<string>} someStrings = null;
+		
+		/** SomeInts is a slice of int64. */
+		union {null, array<long>} someInts = null;
+		
+		/** SomeFloats is a slice of float64. */
+		union {null, array<double>} someFloats = null;
+		
+		/** SomeBools is a slice of bool. */
+		union {null, array<boolean>} someBools = null;
+		
+		/** AnotherSomeString is a string field. */
+		string? anotherSomeString = null;
+		
+		/** AnotherSomeInt is an int64 field. */
+		long? anotherSomeInt = null;
+		
+		/** AnotherSomeFloat is a float64 field. */
+		double? anotherSomeFloat = null;
+		
+		/** AnotherSomeBool is a bool field. */
+		boolean? anotherSomeBool = null;
+		
+		/** AnotherSomeStrings is a slice of strings. */
+		union {null, array<string>} anotherSomeStrings = null;
+		
+		/** AnotherSomeInts is a slice of int64. */
+		union {null, array<long>} anotherSomeInts = null;
+		
+		/** AnotherSomeFloats is a slice of float64. */
+		union {null, array<double>} anotherSomeFloats = null;
+		
+		/** AnotherSomeBools is a slice of bool. */
+		union {null, array<boolean>} anotherSomeBools = null;
+		
+	}
+}
