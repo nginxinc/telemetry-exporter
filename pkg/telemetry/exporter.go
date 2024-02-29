@@ -28,8 +28,8 @@ type Data struct {
 	ClusterVersion string
 	// ClusterPlatform is the Kubernetes platform of the cluster.
 	ClusterPlatform string
-	// DeploymentID is the unique id of the project installation in the cluster.
-	DeploymentID string
+	// InstallationID is the unique id of the project installation in the cluster.
+	InstallationID string
 	// ClusterNodeCount is the number of nodes in the cluster.
 	ClusterNodeCount int64
 }

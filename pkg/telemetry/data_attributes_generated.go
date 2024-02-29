@@ -19,7 +19,7 @@ func (d *Data) Attributes() []attribute.KeyValue {
 	attrs = append(attrs, attribute.String("ClusterID", d.ClusterID))
 	attrs = append(attrs, attribute.String("ClusterVersion", d.ClusterVersion))
 	attrs = append(attrs, attribute.String("ClusterPlatform", d.ClusterPlatform))
-	attrs = append(attrs, attribute.String("DeploymentID", d.DeploymentID))
+	attrs = append(attrs, attribute.String("InstallationID", d.InstallationID))
 	attrs = append(attrs, attribute.Int64("ClusterNodeCount", d.ClusterNodeCount))
 	
 
