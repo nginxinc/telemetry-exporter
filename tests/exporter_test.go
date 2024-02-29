@@ -164,12 +164,10 @@ var _ = Describe("Exporter", func() {
 
 	AfterEach(func() {
 		if collector != nil {
-			err := collector.Terminate(ctx)
-			Expect(err).ToNot(HaveOccurred())
+			Expect(collector.Terminate(ctx)).To(Succeed())
 		}
 		if exporter != nil {
-			err := exporter.Shutdown(ctx)
-			Expect(err).ToNot(HaveOccurred())
+			Expect(exporter.Shutdown(ctx)).To(Succeed())
 		}
 	})
 
@@ -182,8 +180,7 @@ var _ = Describe("Exporter", func() {
 			ResourceCount: 1,
 		}
 
-		err := exporter.Export(ctx, data)
-		Expect(err).ToNot(HaveOccurred())
+		Expect(exporter.Export(ctx, data)).To(Succeed())
 
 		Eventually(lc.unmatchedCount, "10s").Should(BeZero())
 	})
