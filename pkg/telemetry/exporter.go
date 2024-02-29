@@ -11,16 +11,27 @@ import (
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 )
 
-// Data includes common telemetry data points.
-// FIXME(pleshakov): Define the data points.
-// Currently, only one data point is added, for the only reason that we can make sure the generator
-// generates code for a struct defined in this package.
-// https://github.com/nginxinc/telemetry-exporter/issues/8 will define the actual data points.
+// Data defines common telemetry data points for NGINX Kubernetes-related projects.
 //
 //go:generate go run -tags=generator github.com/nginxinc/telemetry-exporter/cmd/generator -type Data
 type Data struct {
-	// Nodes is a number of nodes.
-	Nodes int64
+	// ProjectName is the name of the project.
+	ProjectName string
+	// ProjectVersion is the version of the project.
+	ProjectVersion string
+	// ProjectArchitecture is the architecture the project. For example, "amd64".
+	ProjectArchitecture string
+	// ClusterID is the unique id of the Kubernetes cluster where the project is installed.
+	// It is the UID of the `kube-system` Namespace.
+	ClusterID string
+	// ClusterVersion is the Kubernetes version of the cluster.
+	ClusterVersion string
+	// ClusterPlatform is the Kubernetes platform of the cluster.
+	ClusterPlatform string
+	// DeploymentID is the unique id of the project installation in the cluster.
+	DeploymentID string
+	// ClusterNodeCount is the number of nodes in the cluster.
+	ClusterNodeCount int64
 }
 
 // Exportable allows exporting telemetry data using the Exporter.
