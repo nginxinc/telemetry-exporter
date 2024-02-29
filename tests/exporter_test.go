@@ -63,6 +63,7 @@ func (c *matchingLogConsumer) setExpectedSubstrings(substrings []string) {
 func (c *matchingLogConsumer) unmatchedCount() int {
 	c.sync.Lock()
 	defer c.sync.Unlock()
+
 	return len(c.expectedSubstrings)
 }
 
