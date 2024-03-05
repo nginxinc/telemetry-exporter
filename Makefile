@@ -7,7 +7,7 @@ help: Makefile ## Display this help
 
 .PHONY: unit-test
 unit-test:
-	go test ./pkg/... -race -coverprofile cmd-cover.out
+	go test ./pkg/... -race -shuffle=on -coverprofile=cmd-coverage.out -covermode=atomic
 	go tool cover -html=cmd-cover.out -o cmd-cover.html
 	go test -tags generator ./cmd/generator/... -race -coverprofile generator-cmd-cover.out
 	go tool cover -html=generator-cmd-cover.out -o generator-cmd-cover.html
