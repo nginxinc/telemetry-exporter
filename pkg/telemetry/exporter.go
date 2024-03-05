@@ -19,7 +19,7 @@ type Data struct {
 	ProjectName string
 	// ProjectVersion is the version of the project.
 	ProjectVersion string
-	// ProjectArchitecture is the architecture the project. For example, "amd64".
+	// ProjectArchitecture is the architecture of the project. For example, "amd64".
 	ProjectArchitecture string
 	// ClusterID is the unique id of the Kubernetes cluster where the project is installed.
 	// It is the UID of the `kube-system` Namespace.
