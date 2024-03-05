@@ -47,4 +47,4 @@ generator-tests: ## Regenerate the generator generated files and run generator u
 
 .PHONY: functional-test
 functional-test: ## Run functional tests
-	go run github.com/onsi/ginkgo/v2/ginkgo --randomize-all --randomize-suites --race --keep-going --fail-on-pending --trace -r tests
+	go run github.com/onsi/ginkgo/v2/ginkgo --randomize-all --randomize-suites --race --keep-going --fail-on-pending --trace --covermode=atomic --coverprofile=coverage.out -r tests
