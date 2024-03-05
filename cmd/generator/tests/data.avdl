@@ -9,53 +9,53 @@
 
 		
 		/** SomeString is a string field. */
-		string? someString = null;
+		string? SomeString = null;
 		
 		/** SomeInt is an int64 field. */
-		long? someInt = null;
+		long? SomeInt = null;
 		
 		/** SomeFloat is a float64 field.
 More comments. */
-		double? someFloat = null;
+		double? SomeFloat = null;
 		
 		/** SomeBool is a bool field. */
-		boolean? someBool = null;
+		boolean? SomeBool = null;
 		
 		/** SomeStrings is a slice of strings. */
-		union {null, array<string>} someStrings = null;
+		union {null, array<string>} SomeStrings = null;
 		
 		/** SomeInts is a slice of int64. */
-		union {null, array<long>} someInts = null;
+		union {null, array<long>} SomeInts = null;
 		
 		/** SomeFloats is a slice of float64. */
-		union {null, array<double>} someFloats = null;
+		union {null, array<double>} SomeFloats = null;
 		
 		/** SomeBools is a slice of bool. */
-		union {null, array<boolean>} someBools = null;
+		union {null, array<boolean>} SomeBools = null;
 		
 		/** AnotherSomeString is a string field. */
-		string? anotherSomeString = null;
+		string? AnotherSomeString = null;
 		
 		/** AnotherSomeInt is an int64 field. */
-		long? anotherSomeInt = null;
+		long? AnotherSomeInt = null;
 		
 		/** AnotherSomeFloat is a float64 field. */
-		double? anotherSomeFloat = null;
+		double? AnotherSomeFloat = null;
 		
 		/** AnotherSomeBool is a bool field. */
-		boolean? anotherSomeBool = null;
+		boolean? AnotherSomeBool = null;
 		
 		/** AnotherSomeStrings is a slice of strings. */
-		union {null, array<string>} anotherSomeStrings = null;
+		union {null, array<string>} AnotherSomeStrings = null;
 		
 		/** AnotherSomeInts is a slice of int64. */
-		union {null, array<long>} anotherSomeInts = null;
+		union {null, array<long>} AnotherSomeInts = null;
 		
 		/** AnotherSomeFloats is a slice of float64. */
-		union {null, array<double>} anotherSomeFloats = null;
+		union {null, array<double>} AnotherSomeFloats = null;
 		
 		/** AnotherSomeBools is a slice of bool. */
-		union {null, array<boolean>} anotherSomeBools = null;
+		union {null, array<boolean>} AnotherSomeBools = null;
 		
 	}
 }
