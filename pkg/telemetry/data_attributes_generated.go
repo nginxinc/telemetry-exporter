@@ -13,8 +13,6 @@ import (
 func (d *Data) Attributes() []attribute.KeyValue {
 	var attrs []attribute.KeyValue
 
-	
-
 	attrs = append(attrs, attribute.String("ProjectName", d.ProjectName))
 	attrs = append(attrs, attribute.String("ProjectVersion", d.ProjectVersion))
 	attrs = append(attrs, attribute.String("ProjectArchitecture", d.ProjectArchitecture))

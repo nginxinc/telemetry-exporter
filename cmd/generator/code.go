@@ -33,7 +33,7 @@ import (
 func (d *{{ .StructName }}) Attributes() []attribute.KeyValue {
 	var attrs []attribute.KeyValue
 
-	{{ if .SchemeDataType }}
+	{{- if .SchemeDataType }}
 	attrs = append(attrs, attribute.String("dataType", "{{ .SchemeDataType }}"))
 	{{ end }}
 

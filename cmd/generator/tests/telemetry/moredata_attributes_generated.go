@@ -15,8 +15,6 @@ import (
 func (d *MoreData) Attributes() []attribute.KeyValue {
 	var attrs []attribute.KeyValue
 
-	
-
 	attrs = append(attrs, attribute.String("StringField", d.StringField))
 	
 
