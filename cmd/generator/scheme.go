@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"go/types"
 	"io"
-	"strings"
 	"text/template"
 )
 
@@ -42,10 +41,6 @@ func getAvroPrimitiveType(kind types.BasicKind) string {
 	}
 }
 
-func getAvroFieldName(name string) string {
-	return strings.ToLower(name[:1]) + name[1:]
-}
-
 type schemeGen struct {
 	Namespace          string
 	Protocol           string
@@ -78,7 +73,7 @@ func generateScheme(writer io.Writer, cfg schemeGenConfig) error {
 				schemeFields = append(schemeFields, schemeField{
 					Comment: f.docString,
 					Type:    fmt.Sprintf("union {null, array<%s>}", getAvroPrimitiveType(f.fieldType)),
-					Name:    getAvroFieldName(f.name),
+					Name:    f.name,
 				})
 			} else if f.embeddedStruct {
 				createSchemeFields(f.embeddedStructFields)
@@ -86,7 +81,7 @@ func generateScheme(writer io.Writer, cfg schemeGenConfig) error {
 				schemeFields = append(schemeFields, schemeField{
 					Comment: f.docString,
 					Type:    getAvroPrimitiveType(f.fieldType) + "?",
-					Name:    getAvroFieldName(f.name),
+					Name:    f.name,
 				})
 			}
 		}
