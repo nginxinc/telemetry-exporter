@@ -33,6 +33,10 @@ import (
 func (d *{{ .StructName }}) Attributes() []attribute.KeyValue {
 	var attrs []attribute.KeyValue
 
+	{{ if .SchemeDataType }}
+	attrs = append(attrs, attribute.String("dataType", "{{ .SchemeDataType }}"))
+	{{ end }}
+
 	{{ range .Fields -}}
 	attrs = append(attrs, {{ .AttributesSource }})
 	{{ end }}
@@ -49,6 +53,7 @@ type codeGen struct {
 	TelemetryPackageAlias   string
 	ExportablePackagePrefix string
 	StructName              string
+	SchemeDataType          string
 	BuildTags               string
 	Fields                  []codeField
 }
@@ -73,10 +78,11 @@ func getAttributeType(kind types.BasicKind) string {
 }
 
 type codeGenConfig struct {
-	packagePath string
-	typeName    string
-	buildTags   string
-	fields      []field
+	packagePath    string
+	typeName       string
+	schemeDataType string
+	buildTags      string
+	fields         []field
 }
 
 func generateCode(writer io.Writer, cfg codeGenConfig) error {
@@ -129,6 +135,7 @@ func generateCode(writer io.Writer, cfg codeGenConfig) error {
 		TelemetryPackageAlias:   telemetryPkgAlias,
 		TelemetryPackagePath:    telemetryPkg,
 		StructName:              cfg.typeName,
+		SchemeDataType:          cfg.schemeDataType,
 		Fields:                  codeFields,
 		BuildTags:               cfg.buildTags,
 	}

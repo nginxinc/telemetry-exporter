@@ -15,6 +15,10 @@ import (
 func (d *Data) Attributes() []attribute.KeyValue {
 	var attrs []attribute.KeyValue
 
+	
+	attrs = append(attrs, attribute.String("dataType", "ngf-product-telemetry"))
+	
+
 	attrs = append(attrs, attribute.String("SomeString", d.SomeString))
 	attrs = append(attrs, attribute.Int64("SomeInt", d.SomeInt))
 	attrs = append(attrs, attribute.Float64("SomeFloat", d.SomeFloat))

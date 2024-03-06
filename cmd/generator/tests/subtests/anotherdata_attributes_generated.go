@@ -15,6 +15,8 @@ import (
 func (d *AnotherData) Attributes() []attribute.KeyValue {
 	var attrs []attribute.KeyValue
 
+	
+
 	attrs = append(attrs, attribute.String("AnotherSomeString", d.AnotherSomeString))
 	attrs = append(attrs, attribute.Int64("AnotherSomeInt", d.AnotherSomeInt))
 	attrs = append(attrs, attribute.Float64("AnotherSomeFloat", d.AnotherSomeFloat))

@@ -92,10 +92,11 @@ func main() {
 		}
 
 		codeCfg := codeGenConfig{
-			packagePath: result.packagePath,
-			typeName:    *typeName,
-			fields:      result.fields,
-			buildTags:   codeGenBuildTags,
+			packagePath:    result.packagePath,
+			typeName:       *typeName,
+			schemeDataType: *schemeDataFabricDataType,
+			fields:         result.fields,
+			buildTags:      codeGenBuildTags,
 		}
 
 		if err := generateCode(file, codeCfg); err != nil {
