@@ -36,6 +36,7 @@ func TestData_Attributes(t *testing.T) {
 	}
 
 	expectedAttributes := []attribute.KeyValue{
+		attribute.String("dataType", "ngf-product-telemetry"),
 		attribute.String("SomeString", "some string"),
 		attribute.Int64("SomeInt", 42),
 		attribute.Float64("SomeFloat", 3.14),
@@ -65,6 +66,7 @@ func TestData_AttributesEmpty(t *testing.T) {
 	data := Data{}
 
 	expectedAttributes := []attribute.KeyValue{
+		attribute.String("dataType", "ngf-product-telemetry"),
 		attribute.String("SomeString", ""),
 		attribute.Int64("SomeInt", 0),
 		attribute.Float64("SomeFloat", 0),
