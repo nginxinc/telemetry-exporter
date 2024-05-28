@@ -1,3 +1,8 @@
+[![Go Reference](https://pkg.go.dev/badge/github.com/nginxinc/telemetry-exporter.svg)](https://pkg.go.dev/github.com/nginxinc/telemetry-exporter)
+[![Continuous Integration](https://github.com/nginxinc/telemetry-exporter/actions/workflows/ci.yml/badge.svg)](https://github.com/nginxinc/telemetry-exporter/actions/workflows/ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/nginxinc/telemetry-exporter)](https://goreportcard.com/report/github.com/nginxinc/telemetry-exporter)
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/nginxinc/telemetry-exporter?logo=go)
+
 # Telemetry Exporter
 
 This project is a library that exports product telemetry data to an F5-managed service.
