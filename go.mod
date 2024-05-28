@@ -5,7 +5,7 @@ go 1.22.3
 require (
 	github.com/go-logr/logr v1.4.2
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.8.1
-	github.com/onsi/ginkgo/v2 v2.18.0
+	github.com/onsi/ginkgo/v2 v2.19.0
 	github.com/onsi/gomega v1.33.1
 	github.com/testcontainers/testcontainers-go v0.31.0
 	go.opentelemetry.io/otel v1.27.0
