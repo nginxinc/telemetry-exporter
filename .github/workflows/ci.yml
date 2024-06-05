@@ -83,3 +83,22 @@ jobs:
 
     - name: Run Functional Tests
       run: make functional-test
+
+  release-notes:
+    name: Release Notes
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    if: github.event_name != 'pull_request'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
+
+      - name: Create/Update Draft
+        uses: lucacome/draft-release@8a63d32c79a171ae6048e614a8988f0ac3ed56d4 # v1.1.0
+        id: release-notes
+        with:
+          minor-label: "enhancement"
+          major-label: "change"
+          publish: ${{ github.ref_type == 'tag' }}
+          collapse-after: 30
