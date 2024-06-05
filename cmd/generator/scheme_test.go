@@ -12,6 +12,7 @@ import (
 )
 
 func TestGenerateScheme(t *testing.T) {
+	t.Parallel()
 	g := NewGomegaWithT(t)
 
 	parseCfg := parsingConfig{

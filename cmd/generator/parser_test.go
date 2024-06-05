@@ -29,7 +29,7 @@ type someStruct struct{}
 type SomeStruct struct{}
 
 type DataNotEmbeddedStructField struct {
-	SomeField SomeStruct //nolint:unused
+	SomeField SomeStruct
 }
 
 type SomeInterface interface{}
@@ -86,6 +86,7 @@ type EmbeddedDuplicateFields struct {
 }
 
 func TestParseErrors(t *testing.T) {
+	t.Parallel()
 	tests := []struct {
 		name           string
 		expectedErrMsg string
@@ -176,7 +177,9 @@ func TestParseErrors(t *testing.T) {
 	}
 
 	for _, test := range tests {
+		test := test
 		t.Run(test.name, func(t *testing.T) {
+			t.Parallel()
 			g := NewGomegaWithT(t)
 
 			cfg := parsingConfig{
@@ -194,6 +197,7 @@ func TestParseErrors(t *testing.T) {
 }
 
 func TestParseLoadingFailures(t *testing.T) {
+	t.Parallel()
 	g := NewGomegaWithT(t)
 
 	cfg := parsingConfig{
@@ -209,6 +213,7 @@ func TestParseLoadingFailures(t *testing.T) {
 }
 
 func TestParseSuccess(t *testing.T) {
+	t.Parallel()
 	g := NewGomegaWithT(t)
 
 	cfg := parsingConfig{
@@ -369,6 +374,6 @@ func TestParseSuccess(t *testing.T) {
 
 	result, err := parse(cfg)
 
-	g.Expect(err).To(BeNil())
+	g.Expect(err).ToNot(HaveOccurred())
 	g.Expect(expectedResult).To(Equal(result))
 }

@@ -12,6 +12,7 @@ import (
 )
 
 func TestGenerateCode(t *testing.T) {
+	t.Parallel()
 	g := NewGomegaWithT(t)
 
 	cfg := parsingConfig{

@@ -5,7 +5,7 @@ repos:
     rev: v4.5.0
     hooks:
       - id: trailing-whitespace
-        exclude: (^tests/results/)
+        exclude: (^tests/results/|\.avdl$|_generated.go$)
       - id: end-of-file-fixer
       - id: check-yaml
         args: [--allow-multiple-documents]
@@ -37,10 +37,17 @@ repos:
         pass_filenames: false
 
   - repo: https://github.com/golangci/golangci-lint
-    rev: v1.55.2
+    rev: v1.59.0
     hooks:
       - id: golangci-lint
+        name: golangci-lint-root
+        alias: golangci-lint-root
         args: [--new-from-patch=/tmp/diff.patch]
+
+      - id: golangci-lint
+        name: golangci-lint-tests
+        alias: golangci-lint-tests
+        entry: bash -c 'cd tests && golangci-lint run --fix --config $OLDPWD/.golangci.yml'
 
   # Rules are in .markdownlint-cli2.yaml file
   # See https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md for rule descriptions

@@ -12,6 +12,7 @@ import (
 )
 
 func TestData_Attributes(t *testing.T) {
+	t.Parallel()
 	g := NewGomegaWithT(t)
 
 	data := Data{
@@ -61,6 +62,7 @@ func TestData_Attributes(t *testing.T) {
 }
 
 func TestData_AttributesEmpty(t *testing.T) {
+	t.Parallel()
 	g := NewGomegaWithT(t)
 
 	data := Data{}
