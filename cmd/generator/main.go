@@ -3,6 +3,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"os"
@@ -54,7 +55,7 @@ func main() {
 
 	pkgName := os.Getenv("GOPACKAGE")
 	if pkgName == "" {
-		exitWithError(fmt.Errorf("GOPACKAGE is not set"))
+		exitWithError(errors.New("GOPACKAGE is not set"))
 	}
 
 	var buildFlags []string
@@ -78,7 +79,7 @@ func main() {
 	if *code {
 		fmt.Println("Generating code")
 
-		fileName := fmt.Sprintf("%s_attributes_generated.go", strings.ToLower(*typeName))
+		fileName := strings.ToLower(*typeName) + "_attributes_generated.go"
 
 		file, err := os.Create(fileName)
 		if err != nil {
@@ -107,7 +108,7 @@ func main() {
 	if *scheme {
 		fmt.Println("Generating scheme")
 
-		fileName := fmt.Sprintf("%s.avdl", strings.ToLower(*typeName))
+		fileName := strings.ToLower(*typeName) + ".avdl"
 
 		file, err := os.Create(fileName)
 		if err != nil {

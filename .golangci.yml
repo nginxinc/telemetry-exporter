@@ -1,4 +1,6 @@
 linters-settings:
+  ginkgolinter:
+    forbid-focus-container: true
   misspell:
     locale: US
   revive:
@@ -7,13 +9,17 @@ linters-settings:
       - name: blank-imports
       - name: context-as-argument
       - name: context-keys-type
+      - name: dot-imports
+        arguments:
+          - allowedPackages:
+              - github.com/onsi/gomega
+              - github.com/onsi/ginkgo/v2
       - name: empty-block
       - name: error-naming
       - name: error-return
       - name: error-strings
       - name: errorf
       - name: exported
-      - name: if-return
       - name: increment-decrement
       - name: indent-error-flow
       - name: package-comments
@@ -34,32 +40,58 @@ linters-settings:
       - fieldalignment
   lll:
     line-length: 120
+  dupword:
+    ignore:
+      - "test"
 linters:
   enable:
+    - asasalint
     - asciicheck
+    - dupword
     - errcheck
+    - errname
     - errorlint
+    - exportloopref
+    - fatcontext
+    - forcetypeassert
+    - ginkgolinter
+    - gocheckcompilerdirectives
     - gocyclo
+    - godot
     - gofmt
     - gofumpt
     - goimports
     - gosec
     - gosimple
+    - gosmopolitan
     - govet
     - ineffassign
+    - intrange
     - lll
+    - loggercheck
     - makezero
     - misspell
     - nilerr
     - noctx
+    - nolintlint
+    - paralleltest
+    - prealloc
     - predeclared
+    - reassign
     - revive
+    - spancheck
     - staticcheck
+    - stylecheck
+    - tenv
+    - thelper
+    - tparallel
     - typecheck
     - unconvert
     - unparam
     - unused
+    - usestdlibvars
     - wastedassign
+    - perfsprint
   disable-all: true
 issues:
   max-issues-per-linter: 0

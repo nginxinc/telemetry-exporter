@@ -3,6 +3,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"go/ast"
 	"go/token"
@@ -36,7 +37,7 @@ func newDocStringFieldsProvider(loadTests bool, buildFlags []string) *docStringF
 func parseFullTypeName(fullTypeName string) (pkgName, typeName string) {
 	idx := strings.LastIndex(fullTypeName, ".")
 	if idx == -1 {
-		panic(fmt.Sprintf("invalid full type name: %s", fullTypeName))
+		panic("invalid full type name: " + fullTypeName)
 	}
 
 	return fullTypeName[:idx], fullTypeName[idx+1:]
@@ -61,12 +62,12 @@ func (p *docStringFieldsProvider) getDocString(fullTypeName, fieldName string) (
 
 	doc, exists := p.docStrings[getDocStringKey(pkgName, typeName, fieldName)]
 	if !exists {
-		return "", fmt.Errorf("doc string not found")
+		return "", errors.New("doc string not found")
 	}
 
 	trimmedComment := strings.TrimSpace(doc)
 	if trimmedComment == "" {
-		return "", fmt.Errorf("trimmed doc string is empty")
+		return "", errors.New("trimmed doc string is empty")
 	}
 
 	return trimmedComment, nil
@@ -269,7 +270,7 @@ func parseStruct(s *types.Struct, typeName string, docStringProvider *docStringF
 			return field{}, parsingError{
 				typeName:  typeName,
 				fieldName: f.Name(),
-				msg:       fmt.Sprintf("must be struct, got %s", t.Underlying().String()),
+				msg:       "must be struct, got " + t.Underlying().String(),
 			}
 		}
 
@@ -383,7 +384,7 @@ func parseStruct(s *types.Struct, typeName string, docStringProvider *docStringF
 	parseRecursively = func(s *types.Struct, typeName string) ([]field, error) {
 		var fields []field
 
-		for i := 0; i < s.NumFields(); i++ {
+		for i := range s.NumFields() {
 			f := s.Field(i)
 
 			var parsedField field
@@ -400,7 +401,7 @@ func parseStruct(s *types.Struct, typeName string, docStringProvider *docStringF
 				err = parsingError{
 					typeName:  typeName,
 					fieldName: f.Name(),
-					msg:       fmt.Sprintf("must be of embedded struct, basic type or slice of basic type, got %s", f.Type().String()),
+					msg:       "must be of embedded struct, basic type or slice of basic type, got " + f.Type().String(),
 				}
 			}
 
@@ -414,7 +415,7 @@ func parseStruct(s *types.Struct, typeName string, docStringProvider *docStringF
 				return nil, parsingError{
 					typeName:  typeName,
 					fieldName: f.Name(),
-					msg:       fmt.Sprintf("already exists in %s", owner),
+					msg:       "already exists in " + owner,
 				}
 			}
 
