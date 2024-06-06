@@ -2,6 +2,7 @@ package telemetry
 
 import (
 	"context"
+	"fmt"
 
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
@@ -23,5 +24,9 @@ func CreateOTLPSpanProvider(options ...otlptracegrpc.Option) SpanProvider {
 // newOTLPExporter creates a new gRPC OTLP exporter.
 func newOTLPExporter(ctx context.Context, options ...otlptracegrpc.Option) (*otlptrace.Exporter, error) {
 	traceClient := otlptracegrpc.NewClient(options...)
-	return otlptrace.New(ctx, traceClient)
+	exp, err := otlptrace.New(ctx, traceClient)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create OTLP exporter: %w", err)
+	}
+	return exp, nil
 }
