@@ -75,6 +75,7 @@ linters:
     - noctx
     - nolintlint
     - paralleltest
+    - perfsprint
     - prealloc
     - predeclared
     - reassign
@@ -91,7 +92,8 @@ linters:
     - unused
     - usestdlibvars
     - wastedassign
-    - perfsprint
+    - whitespace
+    - wrapcheck
   disable-all: true
 issues:
   max-issues-per-linter: 0
