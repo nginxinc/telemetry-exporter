@@ -8,6 +8,7 @@ import (
 )
 
 func TestExporter(t *testing.T) {
+	t.Parallel()
 	RegisterFailHandler(Fail)
 	RunSpecs(t, "Tests Suite")
 }

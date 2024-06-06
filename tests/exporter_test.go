@@ -3,6 +3,7 @@ package tests
 import (
 	"bufio"
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"log/slog"
@@ -79,7 +80,7 @@ func getCollectorImageFromDockerfile() (string, error) {
 	for {
 		line, err := reader.ReadString('\n')
 		if err == io.EOF {
-			return "", fmt.Errorf("FROM not found in Dockerfile")
+			return "", errors.New("FROM not found in Dockerfile")
 		}
 		if err != nil {
 			return "", fmt.Errorf("failed to read Dockerfile: %w", err)
