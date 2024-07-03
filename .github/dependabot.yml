@@ -6,7 +6,8 @@ updates:
       interval: daily
 
   - package-ecosystem: gomod
-    directory: "**/*"
+    directories:
+      - "**/*"
     schedule:
       interval: daily
     groups:
