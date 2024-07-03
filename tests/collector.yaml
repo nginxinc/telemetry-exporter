@@ -19,10 +19,10 @@ receivers:
         endpoint: 0.0.0.0:4317
 service:
   extensions:
-  - health_check
+    - health_check
   pipelines:
     traces:
       exporters:
-      - debug
+        - debug
       receivers:
-      - otlp
+        - otlp

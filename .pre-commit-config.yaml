@@ -27,41 +27,27 @@ repos:
     hooks:
       - id: gitleaks
 
-  - repo: local
-    hooks:
-      - id: golang-diff
-        name: create-go-diff
-        entry: bash -c 'git diff -p origin/main > /tmp/diff.patch'
-        language: system
-        types: [go]
-        pass_filenames: false
-
   - repo: https://github.com/golangci/golangci-lint
     rev: v1.59.1
     hooks:
-      - id: golangci-lint
+      - id: golangci-lint-full
         name: golangci-lint-root
         alias: golangci-lint-root
-        args: [--new-from-patch=/tmp/diff.patch]
 
-      - id: golangci-lint
+      - id: golangci-lint-full
         name: golangci-lint-tests
         alias: golangci-lint-tests
         entry: bash -c 'cd tests && golangci-lint run --fix --config $OLDPWD/.golangci.yml'
 
-  # Rules are in .markdownlint-cli2.yaml file
-  # See https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md for rule descriptions
   - repo: https://github.com/DavidAnson/markdownlint-cli2
     rev: v0.13.0
     hooks:
       - id: markdownlint-cli2
 
-  # Rules are in .yamllint.yaml file
-  # See https://yamllint.readthedocs.io/en/stable/rules.html# for rule descriptions
   - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.35.1
     hooks:
       - id: yamllint
 
 ci:
-  skip: [golang-diff, golangci-lint, markdownlint-cli2, yamllint]
+  skip: [golangci-lint-full]
