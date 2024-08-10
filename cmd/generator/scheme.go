@@ -10,6 +10,7 @@ import (
 )
 
 const schemeTemplate = `@namespace("{{ .Namespace }}") protocol {{ .Protocol }} {
+	/** {{ .Record }} is the telemetry data for the product. */
 	@df_datatype("{{ .DataFabricDataType }}") record {{ .Record }} {
 		/** The field that identifies what type of data this is. */
 		string dataType;
