@@ -36,8 +36,7 @@ linters-settings:
   gocyclo:
     min-complexity: 15
   govet:
-    enable:
-      - fieldalignment
+    enable-all: true
   lll:
     line-length: 120
   dupword:
@@ -47,8 +46,12 @@ linters:
   enable:
     - asasalint
     - asciicheck
+    - bidichk
+    - contextcheck
     - dupword
+    - durationcheck
     - errcheck
+    - errchkjson
     - errname
     - errorlint
     - exportloopref
@@ -56,6 +59,8 @@ linters:
     - forcetypeassert
     - ginkgolinter
     - gocheckcompilerdirectives
+    - gochecksumtype
+    - gocritic
     - gocyclo
     - godot
     - gofmt
@@ -71,6 +76,7 @@ linters:
     - loggercheck
     - makezero
     - misspell
+    - musttag
     - nilerr
     - noctx
     - nolintlint
@@ -83,6 +89,7 @@ linters:
     - spancheck
     - staticcheck
     - stylecheck
+    - tagalign
     - tenv
     - thelper
     - tparallel

@@ -70,15 +70,16 @@ func generateScheme(writer io.Writer, cfg schemeGenConfig) error {
 	var createSchemeFields func([]field)
 	createSchemeFields = func(fields []field) {
 		for _, f := range fields {
-			if f.slice {
+			switch {
+			case f.slice:
 				schemeFields = append(schemeFields, schemeField{
 					Comment: f.docString,
 					Type:    fmt.Sprintf("union {null, array<%s>}", getAvroPrimitiveType(f.fieldType)),
 					Name:    f.name,
 				})
-			} else if f.embeddedStruct {
+			case f.embeddedStruct:
 				createSchemeFields(f.embeddedStructFields)
-			} else {
+			default:
 				schemeFields = append(schemeFields, schemeField{
 					Comment: f.docString,
 					Type:    getAvroPrimitiveType(f.fieldType) + "?",

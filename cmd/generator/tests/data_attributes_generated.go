@@ -1,5 +1,6 @@
 //go:build generator
 package tests
+
 /*
 This is a generated file. DO NOT EDIT.
 */
@@ -7,16 +8,12 @@ This is a generated file. DO NOT EDIT.
 import (
 	"go.opentelemetry.io/otel/attribute"
 
-	
 	"github.com/nginxinc/telemetry-exporter/pkg/telemetry"
-	
 )
 
 func (d *Data) Attributes() []attribute.KeyValue {
 	var attrs []attribute.KeyValue
 	attrs = append(attrs, attribute.String("dataType", "ngf-product-telemetry"))
-	
-
 	attrs = append(attrs, attribute.String("SomeString", d.SomeString))
 	attrs = append(attrs, attribute.Int64("SomeInt", d.SomeInt))
 	attrs = append(attrs, attribute.Float64("SomeFloat", d.SomeFloat))
@@ -26,7 +23,6 @@ func (d *Data) Attributes() []attribute.KeyValue {
 	attrs = append(attrs, attribute.Float64Slice("SomeFloats", d.SomeFloats))
 	attrs = append(attrs, attribute.BoolSlice("SomeBools", d.SomeBools))
 	attrs = append(attrs, d.AnotherData.Attributes()...)
-	
 
 	return attrs
 }

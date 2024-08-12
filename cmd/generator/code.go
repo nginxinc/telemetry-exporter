@@ -15,19 +15,20 @@ import (
 
 var telemetryPackagePath = reflect.TypeOf((*telemetry.Exportable)(nil)).Elem().PkgPath()
 
-const codeTemplate = `{{ if .BuildTags }}//go:build {{ .BuildTags }}{{ end }}
+const codeTemplate = `{{- if .BuildTags }}//go:build {{ .BuildTags }}
+{{ end -}}
 package {{ .PackageName }}
+
 /*
 This is a generated file. DO NOT EDIT.
 */
 
 import (
 	"go.opentelemetry.io/otel/attribute"
+	{{- if .TelemetryPackagePath }}
 
-	{{ if .TelemetryPackagePath }}
-	{{ if .TelemetryPackageAlias }}{{ .TelemetryPackageAlias }} {{ end -}}
-	"{{ .TelemetryPackagePath }}"
-	{{ end }}
+	{{ if .TelemetryPackageAlias }}{{ .TelemetryPackageAlias }} {{ end }}"{{ .TelemetryPackagePath }}"
+	{{- end }}
 )
 
 func (d *{{ .StructName }}) Attributes() []attribute.KeyValue {
@@ -35,11 +36,13 @@ func (d *{{ .StructName }}) Attributes() []attribute.KeyValue {
 
 	{{- if .SchemeDataType }}
 	attrs = append(attrs, attribute.String("dataType", "{{ .SchemeDataType }}"))
-	{{ end }}
+	{{- end }}
 
-	{{ range .Fields -}}
+	{{- range .Fields }}
+	{{- if .AttributesSource }}
 	attrs = append(attrs, {{ .AttributesSource }})
-	{{ end }}
+	{{- end }}
+	{{- end }}
 
 	return attrs
 }
@@ -91,15 +94,16 @@ func generateCode(writer io.Writer, cfg codeGenConfig) error {
 	for _, f := range cfg.fields {
 		var cf codeField
 
-		if f.embeddedStruct {
+		switch {
+		case f.embeddedStruct:
 			cf = codeField{
 				AttributesSource: fmt.Sprintf(`d.%s.Attributes()...`, f.name),
 			}
-		} else if f.slice {
+		case f.slice:
 			cf = codeField{
 				AttributesSource: fmt.Sprintf(`attribute.%sSlice("%s", d.%s)`, getAttributeType(f.fieldType), f.name, f.name),
 			}
-		} else {
+		default:
 			cf = codeField{
 				AttributesSource: fmt.Sprintf(`attribute.%s("%s", d.%s)`, getAttributeType(f.fieldType), f.name, f.name),
 			}

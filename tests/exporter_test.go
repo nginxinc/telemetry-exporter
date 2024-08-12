@@ -103,7 +103,7 @@ var _ = Describe("Exporter", func() {
 	)
 
 	BeforeEach(func() {
-		ctx := context.Background()
+		ctx = context.Background()
 
 		//  Run the collector container
 
@@ -131,7 +131,7 @@ var _ = Describe("Exporter", func() {
 			Cmd: []string{"--config=/" + collectorCfgName},
 		}
 
-		collector, err := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		collector, err = testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 			ContainerRequest: req,
 			Started:          true,
 		})
