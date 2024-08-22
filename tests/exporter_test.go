@@ -1,13 +1,9 @@
 package tests
 
 import (
-	"bufio"
 	"context"
-	"errors"
 	"fmt"
-	"io"
 	"log/slog"
-	"os"
 	"strings"
 	"sync"
 
@@ -68,32 +64,6 @@ func (c *matchingLogConsumer) unmatchedCount() int {
 	return len(c.expectedSubstrings)
 }
 
-func getCollectorImageFromDockerfile() (string, error) {
-	dockerFile, err := os.Open("Dockerfile")
-	if err != nil {
-		return "", fmt.Errorf("failed to open Dockerfile: %w", err)
-	}
-	defer dockerFile.Close()
-
-	reader := bufio.NewReader(dockerFile)
-
-	for {
-		line, err := reader.ReadString('\n')
-		if err == io.EOF {
-			return "", errors.New("FROM not found in Dockerfile")
-		}
-		if err != nil {
-			return "", fmt.Errorf("failed to read Dockerfile: %w", err)
-		}
-
-		if !strings.HasPrefix(line, "FROM ") {
-			continue
-		}
-
-		return strings.TrimSpace(strings.TrimPrefix(line, "FROM ")), nil
-	}
-}
-
 var _ = Describe("Exporter", func() {
 	var (
 		lc        *matchingLogConsumer
@@ -106,9 +76,8 @@ var _ = Describe("Exporter", func() {
 		ctx = context.Background()
 
 		//  Run the collector container
-
-		image, err := getCollectorImageFromDockerfile()
-		Expect(err).ToNot(HaveOccurred())
+		// renovate: datasource=docker
+		image := "otel/opentelemetry-collector-contrib:0.106.1"
 
 		const collectorCfgName = "collector.yaml"
 
@@ -131,11 +100,12 @@ var _ = Describe("Exporter", func() {
 			Cmd: []string{"--config=/" + collectorCfgName},
 		}
 
-		collector, err = testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		var errCollector error
+		collector, errCollector = testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 			ContainerRequest: req,
 			Started:          true,
 		})
-		Expect(err).ToNot(HaveOccurred())
+		Expect(errCollector).ToNot(HaveOccurred())
 
 		// Create the exporter
 

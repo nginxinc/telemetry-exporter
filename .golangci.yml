@@ -48,13 +48,13 @@ linters:
     - asciicheck
     - bidichk
     - contextcheck
+    - copyloopvar
     - dupword
     - durationcheck
     - errcheck
     - errchkjson
     - errname
     - errorlint
-    - exportloopref
     - fatcontext
     - forcetypeassert
     - ginkgolinter
