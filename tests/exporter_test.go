@@ -76,15 +76,17 @@ var _ = Describe("Exporter", func() {
 		ctx = context.Background()
 
 		//  Run the collector container
-		// renovate: datasource=docker
-		image := "otel/opentelemetry-collector-contrib:0.106.1"
+
+		collectorImage := "otel/opentelemetry-collector-contrib"
+		// renovate: datasource=docker depName=otel/opentelemetry-collector-contrib
+		collectorImageVersion := "0.106.1"
 
 		const collectorCfgName = "collector.yaml"
 
 		lc = &matchingLogConsumer{}
 
 		req := testcontainers.ContainerRequest{
-			Image: image,
+			Image: collectorImage + ":" + collectorImageVersion,
 			Files: []testcontainers.ContainerFile{
 				{
 					HostFilePath:      "./" + collectorCfgName,
