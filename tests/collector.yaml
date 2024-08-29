@@ -1,11 +1,8 @@
 exporters:
   debug:
     verbosity: detailed
-  logging: {}
 extensions:
   health_check: {}
-  memory_ballast:
-    size_in_percentage: 40
 processors:
   batch: {}
   memory_limiter:
