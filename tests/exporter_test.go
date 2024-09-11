@@ -6,6 +6,7 @@ import (
 	"log/slog"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/go-logr/logr"
 	. "github.com/onsi/ginkgo/v2"
@@ -69,11 +70,10 @@ var _ = Describe("Exporter", func() {
 		lc        *matchingLogConsumer
 		exporter  *telemetry.Exporter
 		collector testcontainers.Container
-		ctx       context.Context
 	)
 
 	BeforeEach(func() {
-		ctx = context.Background()
+		ctx := context.Background()
 
 		//  Run the collector container
 
@@ -108,6 +108,7 @@ var _ = Describe("Exporter", func() {
 			Started:          true,
 		})
 		Expect(errCollector).ToNot(HaveOccurred())
+		DeferCleanup(collector.Terminate, ctx)
 
 		// Create the exporter
 
@@ -134,18 +135,10 @@ var _ = Describe("Exporter", func() {
 			telemetry.WithGlobalOTelErrorHandler(errorHandler),
 		)
 		Expect(err).ToNot(HaveOccurred())
+		DeferCleanup(exporter.Shutdown, ctx)
 	})
 
-	AfterEach(func() {
-		if collector != nil {
-			Expect(collector.Terminate(ctx)).To(Succeed())
-		}
-		if exporter != nil {
-			Expect(exporter.Shutdown(ctx)).To(Succeed())
-		}
-	})
-
-	It("exports data successfully", func() {
+	It("exports data successfully", func(ctx SpecContext) {
 		lc.setExpectedSubstrings([]string{
 			"resourceCount: Int(1)",
 		})
@@ -156,6 +149,8 @@ var _ = Describe("Exporter", func() {
 
 		Expect(exporter.Export(ctx, data)).To(Succeed())
 
-		Eventually(lc.unmatchedCount, "10s").Should(BeZero())
-	})
+		Eventually(func() int {
+			return lc.unmatchedCount()
+		}).WithContext(ctx).Should(BeZero())
+	}, SpecTimeout(time.Second*10))
 })
