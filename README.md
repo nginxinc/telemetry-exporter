@@ -1,5 +1,5 @@
 <!-- markdownlint-disable-next-line first-line-h1 -->
-[![OpenSSFScorecard](https://api.securityscorecards.dev/projects/github.com/nginxinc/telemetry-exporter/badge)](https://api.securityscorecards.dev/projects/github.com/nginxinc/telemetry-exporter)
+[![OpenSSFScorecard](https://api.securityscorecards.dev/projects/github.com/nginxinc/telemetry-exporter/badge)](https://scorecard.dev/viewer/?uri=github.com/nginxinc/telemetry-exporter)
 [![CI](https://github.com/nginxinc/telemetry-exporter/actions/workflows/ci.yml/badge.svg)](https://github.com/nginxinc/telemetry-exporter/actions/workflows/ci.yml)
 [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B5618%2Fgithub.com%2Fnginxinc%2Ftelemetry-exporter.svg?type=shield)](https://app.fossa.com/projects/custom%2B5618%2Fgithub.com%2Fnginxinc%2Ftelemetry-exporter?ref=badge_shield)
 [![Go Reference](https://pkg.go.dev/badge/github.com/nginxinc/telemetry-exporter.svg)](https://pkg.go.dev/github.com/nginxinc/telemetry-exporter)
