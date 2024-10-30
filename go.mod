@@ -5,7 +5,7 @@ go 1.23.0
 require (
 	github.com/go-logr/logr v1.4.2
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.10.0
-	github.com/onsi/ginkgo/v2 v2.20.2
+	github.com/onsi/ginkgo/v2 v2.21.0
 	github.com/onsi/gomega v1.35.0
 	go.opentelemetry.io/otel v1.31.0
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.31.0
@@ -19,7 +19,7 @@ require (
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
-	github.com/google/pprof v0.0.0-20240827171923-fa2c70bbbfe5 // indirect
+	github.com/google/pprof v0.0.0-20241029153458-d1b30febd7db // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0 // indirect
 	go.opentelemetry.io/otel/metric v1.31.0 // indirect
