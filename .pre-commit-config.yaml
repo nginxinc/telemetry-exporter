@@ -40,7 +40,7 @@ repos:
         entry: bash -c 'cd tests && golangci-lint run --fix --config $OLDPWD/.golangci.yml'
 
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.16.0
+    rev: v0.17.1
     hooks:
       - id: markdownlint-cli2
 
