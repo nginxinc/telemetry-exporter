@@ -25,6 +25,9 @@ jobs:
   vars:
     name: Checks and variables
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      pull-requests: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
