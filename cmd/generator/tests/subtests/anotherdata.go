@@ -6,7 +6,7 @@ package subtests
 // when generating code and scheme.
 // AnotherData includes a field of each supported data type except an embedded struct.
 //
-//go:generate go run -tags generator github.com/nginxinc/telemetry-exporter/cmd/generator -type=AnotherData -build-tags=generator
+//go:generate go run -tags generator github.com/nginx/telemetry-exporter/cmd/generator -type=AnotherData -build-tags=generator
 //nolint:govet // Disable fieldalignment linter (part of govet), to control the order of fields for better readability.
 type AnotherData struct {
 	// AnotherSomeString is a string field.

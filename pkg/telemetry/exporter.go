@@ -13,7 +13,7 @@ import (
 
 // Data defines common telemetry data points for NGINX Kubernetes-related projects.
 //
-//go:generate go run -tags=generator github.com/nginxinc/telemetry-exporter/cmd/generator -type Data
+//go:generate go run -tags=generator github.com/nginx/telemetry-exporter/cmd/generator -type Data
 type Data struct {
 	// ProjectName is the name of the project.
 	ProjectName string

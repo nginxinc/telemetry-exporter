@@ -9,8 +9,8 @@ import (
 	"go.opentelemetry.io/otel/attribute"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 
-	"github.com/nginxinc/telemetry-exporter/pkg/telemetry"
-	"github.com/nginxinc/telemetry-exporter/pkg/telemetry/telemetryfakes"
+	"github.com/nginx/telemetry-exporter/pkg/telemetry"
+	"github.com/nginx/telemetry-exporter/pkg/telemetry/telemetryfakes"
 )
 
 type exportableData struct {

@@ -8,7 +8,7 @@ import (
 	. "github.com/onsi/gomega"
 	"go.opentelemetry.io/otel/attribute"
 
-	"github.com/nginxinc/telemetry-exporter/cmd/generator/tests/subtests"
+	"github.com/nginx/telemetry-exporter/cmd/generator/tests/subtests"
 )
 
 func TestData_Attributes(t *testing.T) {

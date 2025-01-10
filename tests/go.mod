@@ -1,12 +1,12 @@
-module github.com/nginxinc/telemetry-exporter/tests
+module github.com/nginx/telemetry-exporter/tests
 
 go 1.23.0
 
-replace github.com/nginxinc/telemetry-exporter => ../
+replace github.com/nginx/telemetry-exporter => ../
 
 require (
 	github.com/go-logr/logr v1.4.2
-	github.com/nginxinc/telemetry-exporter v0.0.0
+	github.com/nginx/telemetry-exporter v0.0.0
 	github.com/onsi/ginkgo/v2 v2.22.2
 	github.com/onsi/gomega v1.36.2
 	github.com/testcontainers/testcontainers-go v0.34.0

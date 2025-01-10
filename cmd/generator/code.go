@@ -10,7 +10,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/nginxinc/telemetry-exporter/pkg/telemetry"
+	"github.com/nginx/telemetry-exporter/pkg/telemetry"
 )
 
 var telemetryPackagePath = reflect.TypeOf((*telemetry.Exportable)(nil)).Elem().PkgPath()

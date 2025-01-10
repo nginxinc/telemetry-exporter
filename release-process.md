@@ -21,7 +21,7 @@ The project follows [Semantic Versioning](https://semver.org/) for versioning.
 ## Release Planning and Development
 
 The features that will go into the next release are reflected in the
-corresponding [milestone](https://github.com/nginxinc/telemetry-exporter/milestones). Refer to
+corresponding [milestone](https://github.com/nginx/telemetry-exporter/milestones). Refer to
 the [Issue Lifecycle](/ISSUE_LIFECYCLE.md) document for information on issue creation and assignment to releases.
 
 ## Releasing a New Version
@@ -29,7 +29,7 @@ the [Issue Lifecycle](/ISSUE_LIFECYCLE.md) document for information on issue cre
 1. Create an issue to define and track release-related activities. Choose a title that follows the
    format `Release X.Y.Z`.
 2. Stop merging any new work into the main branch.
-3. Check the release draft under the [GitHub releases](https://github.com/nginxinc/telemetry-exporter/releases) page to ensure that everything is in order.
+3. Check the release draft under the [GitHub releases](https://github.com/nginx/telemetry-exporter/releases) page to ensure that everything is in order.
 4. Create and push the release tag in the format `vX.Y.Z`:
 
     ```bash
