@@ -1,4 +1,4 @@
-module github.com/nginxinc/telemetry-exporter
+module github.com/nginx/telemetry-exporter
 
 go 1.23.0
 

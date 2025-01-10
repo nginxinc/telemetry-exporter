@@ -5,7 +5,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com/nginxinc/telemetry-exporter/pkg/telemetry"
+	"github.com/nginx/telemetry-exporter/pkg/telemetry"
 	"go.opentelemetry.io/otel/sdk/trace"
 )
 

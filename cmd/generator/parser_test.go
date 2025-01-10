@@ -8,7 +8,7 @@ import (
 
 	. "github.com/onsi/gomega"
 
-	"github.com/nginxinc/telemetry-exporter/cmd/generator/tests"
+	"github.com/nginx/telemetry-exporter/cmd/generator/tests"
 )
 
 type DataUnexportedBasicTypeField struct {
@@ -155,7 +155,7 @@ func TestParseErrors(t *testing.T) {
 		{
 			name: "unsupported slice type",
 			expectedErrMsg: "field Structs: type of field must be one of bool, float64, int64, string, " +
-				"got []github.com/nginxinc/telemetry-exporter/cmd/generator.SomeStruct",
+				"got []github.com/nginx/telemetry-exporter/cmd/generator.SomeStruct",
 			typeName: "UnsupportedSliceType",
 		},
 		{
@@ -166,7 +166,7 @@ func TestParseErrors(t *testing.T) {
 		{
 			name: "duplicate fields",
 			expectedErrMsg: "field Counter: already exists in " +
-				"github.com/nginxinc/telemetry-exporter/cmd/generator.DuplicateFields",
+				"github.com/nginx/telemetry-exporter/cmd/generator.DuplicateFields",
 			typeName: "DuplicateFields",
 		},
 		{
@@ -218,7 +218,7 @@ func TestParseSuccess(t *testing.T) {
 	cfg := parsingConfig{
 		pkgName:     "tests",
 		typeName:    "Data",
-		loadPattern: "github.com/nginxinc/telemetry-exporter/cmd/generator/tests",
+		loadPattern: "github.com/nginx/telemetry-exporter/cmd/generator/tests",
 		buildFlags:  []string{"-tags=generator"},
 	}
 
@@ -367,7 +367,7 @@ func TestParseSuccess(t *testing.T) {
 	}
 
 	expectedResult := parsingResult{
-		packagePath: "github.com/nginxinc/telemetry-exporter/cmd/generator/tests",
+		packagePath: "github.com/nginx/telemetry-exporter/cmd/generator/tests",
 		fields:      expectedFields,
 	}
 

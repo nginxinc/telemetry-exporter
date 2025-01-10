@@ -23,7 +23,7 @@ considering contributing!
 
 ## Ask a Question
 
-To ask a question please use [Github Discussions](https://github.com/nginxinc/telemetry-exporter/discussions).
+To ask a question please use [Github Discussions](https://github.com/nginx/telemetry-exporter/discussions).
 
 You can also join our [Community Slack](https://community.nginx.org/joinslack) which has a wider NGINX audience.
 

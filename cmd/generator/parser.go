@@ -49,7 +49,7 @@ func getDocStringKey(pkgName, typeName, fieldName string) string {
 
 // getDocString returns the doc string comment for the field of the struct.
 // fullTypeName is the full type name of the struct
-// (e.g. "github.com/nginxinc/nginx-gateway-fabric/pkg/mypackage.MyStruct").
+// (e.g. "github.com/nginx/nginx-gateway-fabric/pkg/mypackage.MyStruct").
 func (p *docStringFieldsProvider) getDocString(fullTypeName, fieldName string) (string, error) {
 	pkgName, typeName := parseFullTypeName(fullTypeName)
 
@@ -155,7 +155,7 @@ type parsingConfig struct {
 	// typeName is the name of the struct.
 	typeName string
 	// loadPattern is the pattern to load the package.
-	// For example, "github.com/nginxinc/nginx-gateway-fabric/pkg/mypackage" or "."
+	// For example, "github.com/nginx/nginx-gateway-fabric/pkg/mypackage" or "."
 	// The path in the pattern is relative to the current working directory.
 	loadPattern string
 	// buildFlags are go build flags (e.g. -tags=foo).

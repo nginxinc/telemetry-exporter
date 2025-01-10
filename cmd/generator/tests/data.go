@@ -2,13 +2,13 @@
 
 package tests
 
-import "github.com/nginxinc/telemetry-exporter/cmd/generator/tests/subtests"
+import "github.com/nginx/telemetry-exporter/cmd/generator/tests/subtests"
 
 // Data includes a field of each supported data type.
 // We use this struct to test the generation of code and scheme.
 // We also use it to test that the generated code compiles and runs as expected.
 //
-//go:generate go run -tags generator github.com/nginxinc/telemetry-exporter/cmd/generator -type=Data -build-tags=generator -scheme -scheme-protocol=NGFProductTelemetry -scheme-df-datatype=ngf-product-telemetry
+//go:generate go run -tags generator github.com/nginx/telemetry-exporter/cmd/generator -type=Data -build-tags=generator -scheme -scheme-protocol=NGFProductTelemetry -scheme-df-datatype=ngf-product-telemetry
 //nolint:govet // Disable fieldalignment linter (part of govet), to control the order of fields for better readability.
 type Data struct {
 	// SomeString is a string field.

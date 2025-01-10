@@ -16,7 +16,7 @@ import (
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 
-	"github.com/nginxinc/telemetry-exporter/pkg/telemetry"
+	"github.com/nginx/telemetry-exporter/pkg/telemetry"
 )
 
 type telemetryData struct {
